@@ -2,6 +2,10 @@ package com.damapi.gestao_biblioteca.dtos;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.damapi.gestao_biblioteca.entities.Categoria;
 
 public class CategoriaDTO implements Serializable{
@@ -9,7 +13,11 @@ public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotEmpty(message = "O nome da CATEGORIA é OBRIGATORIO!")
+	@Length(min = 4, max = 100)
 	private String nome;
+	@NotEmpty(message = "A descrição è OBRIGATORIO!")
+	@Length(min = 20, max = 200)
 	private String descricao;
 	
 	public CategoriaDTO() {

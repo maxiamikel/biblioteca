@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Categoria implements Serializable {
@@ -19,7 +22,11 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message = "O nome da CATEGORIA é OBRIGATORIO!")
+	@Length(min = 4, max = 100)
 	private String nome;
+	@NotEmpty(message = "A descrição è OBRIGATORIO!")
+	@Length(min = 20, max = 200)
 	private String descricao;
 
 	@OneToMany(mappedBy = "categoria")
