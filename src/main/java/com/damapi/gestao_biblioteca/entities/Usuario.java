@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Usuario implements Serializable {
@@ -21,11 +24,20 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@NotEmpty(message = "Preenche o nome")
+	@Length(min = 3, max = 50)
 	private String nome;
+	@NotEmpty(message = "O CPF é obrigatorio")
+	@Length(min = 11, max = 14)
 	private String cpf;
+	@NotEmpty(message = "Preenche o EMAIL")
+	@Length(min = 10, max =100 )
 	private String email;
+	@NotEmpty(message = "O sex não pode ser vázio")
+	@Length(min = 1, max =9 )
 	private String sexo;
+	@NotEmpty(message = "O celular é obrigatorio")
+	@Length(min = 9, max =16 )
 	private String celular;
 	
 	@OneToOne

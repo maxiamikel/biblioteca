@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,14 +43,14 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Usuario> postLovro(@RequestBody Usuario Usuario){
+	public ResponseEntity<Usuario> postUsuario(@Valid @RequestBody Usuario Usuario){
 		Usuario obj = service.salvarUmUsuario(Usuario);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(Usuario.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario Usuario){
+	public ResponseEntity<Usuario> updateUsuario(@Valid @PathVariable Long id, @RequestBody Usuario Usuario){
 		Usuario newUsuario = service.atualizarUsuario(id, Usuario);
 		return ResponseEntity.ok().body(newUsuario);
 	}

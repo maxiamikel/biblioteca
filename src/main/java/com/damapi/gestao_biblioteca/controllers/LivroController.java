@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,14 +43,14 @@ public class LivroController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Livro> postLovro(@RequestBody Livro livro){
+	public ResponseEntity<Livro> postLovro(@Valid @RequestBody Livro livro){
 		Livro obj = service.salvarUmLivro(livro);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(livro.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Livro> updateLivro(@PathVariable Long id, @RequestBody Livro livro){
+	public ResponseEntity<Livro> updateLivro(@Valid @PathVariable Long id, @RequestBody Livro livro){
 		Livro newLivro = service.atualizarLivro(id, livro);
 		return ResponseEntity.ok().body(newLivro);
 	}
