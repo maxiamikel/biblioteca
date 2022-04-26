@@ -8,10 +8,11 @@ import org.hibernate.validator.constraints.Length;
 
 import com.damapi.gestao_biblioteca.entities.Usuario;
 
-public class UsuarioDTO implements Serializable {
+public class UsuarioDTO implements Serializable{
 
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private Long id;
 	@NotEmpty(message = "Preenche o nome")
 	@Length(min = 3, max = 50)
@@ -20,15 +21,15 @@ public class UsuarioDTO implements Serializable {
 	@Length(min = 11, max = 14)
 	private String cpf;
 	@NotEmpty(message = "Preenche o EMAIL")
-	@Length(min = 10, max = 100)
+	@Length(min = 10, max =100 )
 	private String email;
 	@NotEmpty(message = "O sex não pode ser vázio")
-	@Length(min = 1, max = 9)
+	@Length(min = 1, max =9 )
 	private String sexo;
 	@NotEmpty(message = "O celular é obrigatorio")
-	@Length(min = 9, max = 16)
+	@Length(min = 9, max =16 )
 	private String celular;
-
+	
 	public UsuarioDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -36,17 +37,17 @@ public class UsuarioDTO implements Serializable {
 
 	public UsuarioDTO(Usuario usuario) {
 		super();
+		this.id = usuario.getId();
 		this.nome = usuario.getNome();
 		this.cpf = usuario.getCpf();
 		this.email = usuario.getEmail();
 		this.sexo = usuario.getSexo();
 		this.celular = usuario.getCelular();
 	}
-
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -90,5 +91,6 @@ public class UsuarioDTO implements Serializable {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-
+	
+	
 }

@@ -1,8 +1,10 @@
 package com.damapi.gestao_biblioteca.dtos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.damapi.gestao_biblioteca.entities.Emprestimo;
+import com.damapi.gestao_biblioteca.entities.Livro;
 
 public class EmprestimoDTO {
 
@@ -10,6 +12,8 @@ public class EmprestimoDTO {
 	private String status;
 	private LocalDate dataEmprestimo;
 	private LocalDate dataDevolucao;
+	
+	ArrayList<Livro> livros = new ArrayList<>();
 	
 	public EmprestimoDTO() {
 		super();
@@ -22,6 +26,7 @@ public class EmprestimoDTO {
 		this.status = emprestimo.getStatus();
 		this.dataEmprestimo = emprestimo.getDataEmprestimo();
 		this.dataDevolucao = emprestimo.getDataDevolucao();
+		//this.livros = emprestimo.getLivrosPrestados();
 	}
 
 	public Long getId() {
@@ -30,6 +35,14 @@ public class EmprestimoDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public ArrayList<Livro> getLivros() {
+		return livros;
+	}
+	
+	public void setLivros(ArrayList<Livro> livros) {
+		this.livros = livros;
 	}
 
 	public String getStatus() {

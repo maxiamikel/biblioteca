@@ -3,12 +3,14 @@ package com.damapi.gestao_biblioteca.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -38,6 +40,7 @@ public class Livro implements Serializable{
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Emprestimo emprestimo;
 
 	public Livro() {

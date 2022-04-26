@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.damapi.gestao_biblioteca.entities.Livro;
 import com.damapi.gestao_biblioteca.entities.Usuario;
 import com.damapi.gestao_biblioteca.repositories.UsuarioRepository;
+import com.damapi.gestao_biblioteca.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
@@ -18,7 +18,7 @@ public class UsuarioService {
 	
 	public Usuario obterUsuarioPorId(Long id) {
 		Optional<Usuario> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Não podemos localizar o objeto da classe: " + Usuario.class.getSimpleName() +", com ID: "+ id + ", do pacote: "+ Usuario.class.getName()));
 	}
 	
 	public List<Usuario> obterTodosOsUsuarios(){

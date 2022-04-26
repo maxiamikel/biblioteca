@@ -8,34 +8,36 @@ import org.springframework.stereotype.Service;
 
 import com.damapi.gestao_biblioteca.entities.Emprestimo;
 import com.damapi.gestao_biblioteca.repositories.EmprestimoRepository;
+import com.damapi.gestao_biblioteca.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class EmprestimoService {
-	
+
 	@Autowired
 	private EmprestimoRepository repo;
-	
+
 	public Emprestimo obterEmprestimoPorId(Long id) {
 		Optional<Emprestimo> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Não podemos encontrar o tipo: " + Emprestimo.class.getSimpleName() + " com o ID: " + id));
 	}
-	
-	public List<Emprestimo> obterTodosOsEmprestimos(){
+
+	public List<Emprestimo> obterTodosOsEmprestimos() {
 		List<Emprestimo> Emprestimos = repo.findAll();
 		return Emprestimos;
 	}
-	
+
 	public Emprestimo salvarUmEmprestimo(Emprestimo Emprestimo) {
 		Emprestimo.setId(null);
 		return repo.save(Emprestimo);
 	}
-	
-	public void  apagarUmEmprestimo(Long id) {
+
+	public void apagarUmEmprestimo(Long id) {
 		this.obterEmprestimoPorId(id);
 		repo.deleteById(id);
 	}
-	
-	public Emprestimo atualizarEmprestimo( long id, Emprestimo emprestimo) {
+
+	public Emprestimo atualizarEmprestimo(long id, Emprestimo emprestimo) {
 		Emprestimo obj = obterEmprestimoPorId(id);
 		obj.setDataDevolucao(emprestimo.getDataDevolucao());
 		obj.setLivrosPrestados(emprestimo.getLivrosPrestados());
@@ -45,6 +47,5 @@ public class EmprestimoService {
 		obj.setUsuario(emprestimo.getUsuario());
 		return repo.save(obj);
 	}
-	
 
 }

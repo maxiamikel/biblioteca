@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.damapi.gestao_biblioteca.entities.Livro;
 import com.damapi.gestao_biblioteca.repositories.LivroRepository;
+import com.damapi.gestao_biblioteca.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class LivroService {
@@ -20,7 +18,7 @@ public class LivroService {
 	
 	public Livro obterLivroPorId(Long id) {
 		Optional<Livro> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Não encontramos esse Livro ID: "+id+" TIPO: " + Livro.class.getSimpleName()));
 	}
 	
 	public List<Livro> obterTodosOsLivros(){
