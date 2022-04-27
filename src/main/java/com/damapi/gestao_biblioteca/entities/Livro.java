@@ -22,6 +22,8 @@ public class Livro implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	//https://www.youtube.com/watch?v=GhG2wa9LzBw&list=PLA8Qj9w4RGkVOj-xGYJCHJ0Ob4CMg-8NI&index=25
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
